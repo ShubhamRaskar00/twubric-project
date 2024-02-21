@@ -23,3 +23,4 @@ The application consists of the following components:
 I'm glad to hear that you're finding the task of building a Twitter clone to be a valuable learning experience. It's great that you're able to combine resources from the internet with your own knowledge and experience to solve problems. Keep up the good work!
 
 ## Start command
+ng server -open / ng s -o
