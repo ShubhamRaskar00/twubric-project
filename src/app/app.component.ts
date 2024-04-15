@@ -3,11 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HttpClientModule, CommonModule, FormsModule],
+  imports: [RouterOutlet, HttpClientModule, CommonModule, FormsModule, ToastrModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -15,12 +17,23 @@ export class AppComponent {
   title = 'twubric';
   filter: boolean = false;
   httpClient = inject(HttpClient);
-  users: any = [];
+  users: any = [
+    {
+      image: '',
+      username: 'Jondoe',
+      fullname: 'Jon Doe',
+      join_date: '12-04-2023',
+      twubric: {total: 1,friends: 1,influence: 2, chirpiness: 3}
+    }
+  ];
   filteredUsers: any = [];
   sortBy: string = 'score';
   startDate: Date | null = null;
   endDate: Date | null = null;
   searchData: string = '';
+
+  // TODO: Needed to fix this plugin issue
+  // constructor(private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.httpClient
@@ -29,8 +42,8 @@ export class AppComponent {
       )
       .subscribe((data) => {
         this.users = data;
-        this.filteredUsers = JSON.parse(JSON.stringify(this.users));
       });
+      this.filteredUsers = JSON.parse(JSON.stringify(this.users));
   }
 
 filterDate(sDate: any, eDate: any) {
@@ -70,6 +83,7 @@ searchUser() {
 }
 
   removeFollower(i: any) {
+    // this.toastr.success('Hello world!', 'Toastr fun!');
     this.filteredUsers.splice(i, 1);
   }
 
