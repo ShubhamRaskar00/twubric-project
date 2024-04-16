@@ -82,9 +82,9 @@ export class AppComponent {
     });
   }
 
-  removeFollower(i: any) {
-    this.toastr.success(`Successfully deleted ${i.fullname}`, 'Success');
+  removeFollower(item: any, i: number) {
     this.filteredUsers.splice(i, 1);
+    this.toastr.success(`Successfully deleted ${item.fullname}`, 'Success');
   }
 
   resetFilter(type: any) {
